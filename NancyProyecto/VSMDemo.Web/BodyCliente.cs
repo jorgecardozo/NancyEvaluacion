@@ -3,7 +3,7 @@
 namespace VSMDemo.Web
 {
 	[Serializable]
-	public class ConfigInfo
+	public class BodyCliente
 	{
         public string id { get; set; }
         public string nombre { get; set; }

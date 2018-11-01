@@ -18,82 +18,57 @@ namespace VSMDemo.Web
             /*Obtengo todos los Clientes de la Lista en Memoria*/
             Get["/"] = obtener => {          
                 //obtengo un JSON del mapeo de la lista de Clientes
-                string clientes = JsonConvert.SerializeObject(clientesBD.getClientes());
-               
-                return clientes;
+                return Response.AsJson(clientesBD.getClientes());
              };
 
             /*Obtengo los Clientes por ID*/
              Get["/{id}"] = obtenerId =>
              {
-                 
-                 //busco al cliente y lo almaceno en un a lista.
-                 var buscar = clientesBD.getClientes().Where(elem => elem.id.Equals(obtenerId.id));
-                 string salida;
-                 //obtengo un JSON del mapeo de la lista de Clientes
-                 if (buscar.Count() == 0)
-                     salida= "El Id del CLiente no Existe";
-                 else
-                 {   string clienteId = JsonConvert.SerializeObject(buscar);
-                     salida= clienteId;
-                 }               
-                 return salida;
+                 Cliente cliente = clientesBD.buscar(obtenerId.id);
+
+                 return Response.AsJson(cliente);
              };
 
             Post["/agregar"] = agregarCliente => {     
                //Obtengo los valores cargados desde la URL, para armar el nuevo Cliente a cargar
-                var config = this.Bind<ConfigInfo>();
+                var config = this.Bind<BodyCliente>();
 
                 Cliente c = new Cliente(config.id, config.nombre, config.apellido, config.direccion);
                 clientesBD.insertar(c);
-                string agregar = JsonConvert.SerializeObject(clientesBD.getClientes());  
-                
-                return "se agrego: \n"+agregar;
+        
+                return Response.AsJson(config);
 
             };
             
-
-
             Delete["/eliminar"] = eliminar =>{          
                 clientesBD.eliminar();
                 
-                return "Se elimino";
+                return "Se eliminaron todos los cliente";
             };
 
             Delete["/eliminar/{id}"] = eliminar => {              
                 string salida;
-                var buscar = clientesBD.getClientes().Where(elem => elem.id.Equals(eliminar.id));
-                //obtengo un JSON del mapeo de la lista de Clientes
-                if (buscar.Count() == 0)
-                    salida= "El Id del CLiente no Existe";
-                else {
-                    clientesBD.eliminarID(eliminar.id);
-                    salida= "Se elimino";
-                }
+                bool elimino;
                
+                elimino = clientesBD.eliminarID(eliminar.id);
+
+                if (elimino)
+                    salida = "Se elimino el Cliente correctamente";
+                else
+                    salida = "El cliente no Existe";
+
                 return salida;
             };
 
             Put["/actualizar/{id}"] = actualizar =>
             {
-                var buscar = clientesBD.getClientes().Where(elem => elem.id.Equals(actualizar.id));
+               
                 //Obtengo los valores cargados desde la URL, para armar el nuevo Cliente a cargar
-                var config = this.Bind<ConfigInfo>();
-                String salida;
-                if (buscar.Count() == 0) {                   
-                    Cliente c = new Cliente(actualizar.id, config.nombre, config.apellido, config.direccion);
-                    clientesBD.insertar(c);
+                var config = this.Bind<BodyCliente>();
+                Cliente act;
+                act= clientesBD.actualizar(actualizar.id,config.nombre,config.apellido,config.direccion);
 
-                    string agregar = JsonConvert.SerializeObject(clientesBD.getClientes());
-                    salida = "Se agrego nuevo Cliente: " + agregar;
-                }
-                else { /*actualizo*/
-                    clientesBD.actualizar(actualizar.id, config.nombre, config.apellido, config.direccion);
-                    salida = "Se actualizo el Cliente con ID: " + config.id;
-                }
-                
-                return salida;
-
+                return Response.AsJson(act);
             };
 
 

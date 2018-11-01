@@ -11,23 +11,22 @@ namespace VSMDemo.Web
 
         public IClienteMapper() { listaCliente = new List<Cliente>(); }
 
-        public void actualizar(string id,string nombre, string apellido, string direccion)
+        public Cliente actualizar(string id,string nombre, string apellido, string direccion)
         {
-            int i = 0;
-            bool encontro = false;
-            Cliente resul = null;
+            Cliente act = buscar(id);
 
-            while (i < listaCliente.Count && !encontro)
+            if (act != null)
             {
-                if (listaCliente.ElementAt(i).id.Equals(id))
-                {
-                    listaCliente.ElementAt(i).setNombre(nombre);
-                    listaCliente.ElementAt(i).setApellido(apellido);
-                    listaCliente.ElementAt(i).setDireccion(direccion);
-                    encontro = true;
-                }
-                i++;
+                act.setNombre(nombre);
+                act.setApellido(apellido);
+                act.setDireccion(direccion);
             }
+            else {
+                Cliente nuevo = new Cliente(id, nombre, apellido, direccion);
+                insertar(nuevo);
+                act = nuevo;
+            }
+            return act;                            
         }
 
         public void eliminar()
@@ -35,9 +34,15 @@ namespace VSMDemo.Web
             listaCliente.Clear();
         }
 
-        public void eliminarID(string id){
+        public bool eliminarID(string id){
 
-            listaCliente.RemoveAll(x => x.id == id);
+            bool busqueda=false;
+
+            if (!(buscar(id) == null)) {
+                listaCliente.RemoveAll(x => x.id == id);
+                busqueda = true;
+            }
+            return busqueda;
         }
 
         public List<Cliente> getClientes()
@@ -50,27 +55,23 @@ namespace VSMDemo.Web
             listaCliente.Add(obj);
         }
 
-        public Cliente getClienteId(string id) {
+        public Cliente buscar(string id) {
 
             int i = 0;
             bool encontro = false;
-            Cliente resul = null;
+            Cliente cliente = null;
 
             while (i < listaCliente.Count && !encontro)
             {
                 if (listaCliente.ElementAt(i).id.Equals(id))
                 {
-                    resul = listaCliente.ElementAt(i);
+                    cliente = listaCliente.ElementAt(i);
                     encontro = true;
                 }
                 i++;
-            }
-
-            return resul;
+            }    
+            return cliente;
         }
 
-
-
-        
     }
 }

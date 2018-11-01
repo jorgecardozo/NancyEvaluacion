@@ -8,9 +8,11 @@ namespace VSMDemo.Web
     public interface IDataMapper<TObject> where TObject : class
     {
         void insertar(TObject obj);
-        void actualizar(string id, string nombre, string apellido, string direccion);
+        TObject actualizar(string id, string nombre, string apellido, string direccion);
         void eliminar();
-        void eliminarID(string id);
+        bool eliminarID(string id);
+        TObject buscar(string id);
+        
         List<TObject> getClientes();
     }
 }

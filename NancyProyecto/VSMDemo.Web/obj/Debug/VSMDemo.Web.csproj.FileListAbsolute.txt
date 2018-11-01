@@ -18,3 +18,12 @@ C:\Users\Jorge\Desktop\0313vsm_SteeleCSharpCornerCode\NancyProyecto\VSMDemo.Web\
 C:\Users\Jorge\Desktop\0313vsm_SteeleCSharpCornerCode\NancyProyecto\VSMDemo.Web\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Jorge\Desktop\0313vsm_SteeleCSharpCornerCode\NancyProyecto\VSMDemo.Web\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Jorge\Desktop\0313vsm_SteeleCSharpCornerCode\NancyProyecto\VSMDemo.Web\obj\Debug\VSMDemo.Web.csproj.CopyComplete
+D:\NeoComplexx\NancyEvaluacion\NancyProyecto\VSMDemo.Web\bin\Debug\VSMDemo.Web.dll
+D:\NeoComplexx\NancyEvaluacion\NancyProyecto\VSMDemo.Web\bin\Debug\VSMDemo.Web.pdb
+D:\NeoComplexx\NancyEvaluacion\NancyProyecto\VSMDemo.Web\bin\Debug\Nancy.dll
+D:\NeoComplexx\NancyEvaluacion\NancyProyecto\VSMDemo.Web\bin\Debug\Newtonsoft.Json.xml
+D:\NeoComplexx\NancyEvaluacion\NancyProyecto\VSMDemo.Web\obj\Debug\VSMDemo.Web.csprojAssemblyReference.cache
+D:\NeoComplexx\NancyEvaluacion\NancyProyecto\VSMDemo.Web\obj\Debug\VSMDemo.Web.csproj.CoreCompileInputs.cache
+D:\NeoComplexx\NancyEvaluacion\NancyProyecto\VSMDemo.Web\obj\Debug\VSMDemo.Web.csproj.CopyComplete
+D:\NeoComplexx\NancyEvaluacion\NancyProyecto\VSMDemo.Web\obj\Debug\VSMDemo.Web.dll
+D:\NeoComplexx\NancyEvaluacion\NancyProyecto\VSMDemo.Web\obj\Debug\VSMDemo.Web.pdb

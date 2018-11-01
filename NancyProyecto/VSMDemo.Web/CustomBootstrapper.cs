@@ -16,19 +16,12 @@ namespace VSMDemo.Web
 	{
         Stopwatch timer;
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
-        {    /*Inyeccion de Dependecia*/
-            ///container.Register(new IClienteMapper());
-
+        {   
             base.ConfigureApplicationContainer(container);
 			ResourceViewLocationProvider.RootNamespaces.Add(Assembly.GetAssembly(typeof(MainModule)), "VSMDemo.Web");
 
-            //container.Register<IDataMapper<Cliente>,IClienteMapper>();
-            // container.Register<IDataMapper<Cliente>>(new IClienteMapper()).AsSingleto();
-
-            //container.Register<IClienteMapper>(new IClienteMapper()).AsSingleton();
-           // container.Register<IDataMapper<Cliente>>(new IClienteMapper());
-          
-
+            /*Inyeccion de Dependecia*/
+            container.Register<IDataMapper<Cliente>>(new IClienteMapper());
             // This is a concrete type registration.
             // When I ask the container for one of these, it will build me one each time.
             container.Register<IClienteMapper>().AsSingleton();
@@ -37,25 +30,8 @@ namespace VSMDemo.Web
 
         protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
         {
-            base.ConfigureRequestContainer(container, context);
-
-            // Get our session manager - this will "bubble up" to the parent container
-            // and get our application scope singleton
-           var session = container.Resolve<IClienteMapper>();
-
-            // We can put this in context.items and it will be disposed when the request ends
-            // assuming it implements IDisposable.
-            context.Items["RavenSession"] = session;
-
-            // Just guessing what this type is called
-            container.Register<IDataMapper<Cliente>>(session);
-
-            container.Register<IDataMapper<Cliente>,IClienteMapper>();
-
-
-            //otra opcion
-            TinyIoCContainer.Current.Resolve<IClienteMapper>();
-
+            base.ConfigureRequestContainer(container, context);     
+            container.Resolve<IClienteMapper>();
         }
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)

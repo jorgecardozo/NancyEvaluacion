@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cliente.cs" />
-    <Compile Include="ConfigInfo.cs" />
+    <Compile Include="BodyCliente.cs" />
     <Compile Include="CustomBootstrapper.cs" />
     <Compile Include="IClienteMapper.cs" />
     <Compile Include="IDataMapper.cs" />
